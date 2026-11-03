@@ -1,0 +1,8 @@
+{
+  "name": "vc-automatisation",
+  "version": "1.0.0",
+  "description": "Automatisation & intégrations — Brancher Claude sur n8n, Google Docs et X/Twitter.",
+  "author": {
+    "name": "Orkun"
+  }
+}

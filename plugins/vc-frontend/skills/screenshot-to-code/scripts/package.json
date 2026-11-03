@@ -1,0 +1,9 @@
+{
+  "name": "screenshot-to-code-tools",
+  "private": true,
+  "type": "module",
+  "description": "Rendu Playwright pour la skill screenshot-to-code (même version que le navigateur installé dans ~/.cache/ms-playwright)",
+  "dependencies": {
+    "playwright-core": "1.48.2"
+  }
+}

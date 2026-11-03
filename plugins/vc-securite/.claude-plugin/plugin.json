@@ -1,0 +1,8 @@
+{
+  "name": "vc-securite",
+  "version": "1.0.0",
+  "description": "Sécurité & serveurs — Auditer une app web et durcir un serveur Linux.",
+  "author": {
+    "name": "Orkun"
+  }
+}

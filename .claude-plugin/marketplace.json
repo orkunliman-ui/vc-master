@@ -1,0 +1,54 @@
+{
+  "name": "vc-master",
+  "owner": {
+    "name": "Orkun"
+  },
+  "metadata": {
+    "description": "VC Master — 59 skills Claude Code rangés en 7 sections.",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "vc-methode",
+      "source": "./plugins/vc-methode",
+      "description": "Méthode de dev — Réfléchir, planifier, coder, déboguer, vérifier et trancher comme une équipe senior.",
+      "version": "1.0.0"
+    },
+    {
+      "name": "vc-boost",
+      "source": "./plugins/vc-boost",
+      "description": "Booster Claude Code — Moins de tokens, plus d'autonomie, et fabriquer ses propres skills.",
+      "version": "1.0.0"
+    },
+    {
+      "name": "vc-frontend",
+      "source": "./plugins/vc-frontend",
+      "description": "Frontend & design — Sites et interfaces au niveau des meilleurs studios.",
+      "version": "1.0.0"
+    },
+    {
+      "name": "vc-video",
+      "source": "./plugins/vc-video",
+      "description": "Vidéo & motion design — Vidéos promo, motion design et prompts de génération vidéo IA.",
+      "version": "1.0.0"
+    },
+    {
+      "name": "vc-marketing",
+      "source": "./plugins/vc-marketing",
+      "description": "Marketing & SEO — Être trouvé sur Google et par les IA, et vendre avec des pubs qui convertissent.",
+      "version": "1.0.0"
+    },
+    {
+      "name": "vc-securite",
+      "source": "./plugins/vc-securite",
+      "description": "Sécurité & serveurs — Auditer une app web et durcir un serveur Linux.",
+      "version": "1.0.0"
+    },
+    {
+      "name": "vc-automatisation",
+      "source": "./plugins/vc-automatisation",
+      "description": "Automatisation & intégrations — Brancher Claude sur n8n, Google Docs et X/Twitter.",
+      "version": "1.0.0"
+    }
+  ]
+}
