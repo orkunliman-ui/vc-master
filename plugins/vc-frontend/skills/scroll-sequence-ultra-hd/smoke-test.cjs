@@ -76,15 +76,15 @@ async function runPass(browser, { label, viewport }) {
     triggers: window.ScrollTrigger ? window.ScrollTrigger.getAll().length : 0,
     pinSpacers: document.querySelectorAll('.pin-spacer').length,
     preloaderGone: !document.getElementById('preloader'),
-    heroHook: !!window.__abd?.hero,
-    harmoHook: !!window.__abd?.harmonisation,
+    heroHook: !!window.__seq?.hero,
+    harmoHook: !!window.__seq?.harmonisation,
   }))
   if (!rt.gsap || !rt.st) fail(`GSAP/ScrollTrigger absents (gsap=${rt.gsap}, st=${rt.st})`)
   if (rt.triggers < MIN_TRIGGERS) fail(`${rt.triggers} triggers — minimum ${MIN_TRIGGERS}`)
   if (rt.pinSpacers < MIN_PIN_SPACERS) fail(`${rt.pinSpacers} pin-spacer — attendu >= ${MIN_PIN_SPACERS} (hero + harmonisation)`)
   if (!rt.preloaderGone) fail('preloader toujours dans le DOM')
-  if (!rt.heroHook) fail('séquence hero inactive (window.__abd.hero absent — frames pas chargées ?)')
-  if (!rt.harmoHook) fail('harmonisation inactive (window.__abd.harmonisation absent)')
+  if (!rt.heroHook) fail('séquence hero inactive (window.__seq.hero absent — frames pas chargées ?)')
+  if (!rt.harmoHook) fail('harmonisation inactive (window.__seq.harmonisation absent)')
   if (!failed) ok(`runtime : ${rt.triggers} triggers, ${rt.pinSpacers} pins, hooks présents`)
 
   const canvasShot = () =>
@@ -92,12 +92,12 @@ async function runPass(browser, { label, viewport }) {
 
   // 2. Le canvas hero change réellement de frame entre 0 % et ~50 % du pin
   const shotTop = await canvasShot()
-  const frameTop = await page.evaluate(() => window.__abd.hero.frame())
+  const frameTop = await page.evaluate(() => window.__seq.hero.frame())
   await page.mouse.move(viewport.width / 2, viewport.height / 2)
   await wheelBy(page, viewport.height * 1.6) // ~50 % du pin de 300vh
   await page.waitForTimeout(800)
   const shotMid = await canvasShot()
-  const frameMid = await page.evaluate(() => window.__abd.hero.frame())
+  const frameMid = await page.evaluate(() => window.__seq.hero.frame())
   if (shotTop === shotMid) fail('canvas hero identique entre 0 % et ~50 % du pin (séquence morte)')
   else ok(`canvas hero anime : frame ${frameTop} → ${frameMid}`)
   if (frameMid <= frameTop) fail(`index de frame ne progresse pas (${frameTop} → ${frameMid})`)
@@ -110,8 +110,8 @@ async function runPass(browser, { label, viewport }) {
     await page.mouse.wheel(0, 700)
     await page.waitForTimeout(120)
     const s = await page.evaluate(() => ({
-      p: window.__abd.harmonisation.progress(),
-      f: window.__abd.harmonisation.formed(),
+      p: window.__seq.harmonisation.progress(),
+      f: window.__seq.harmonisation.formed(),
     }))
     peakFormed = Math.max(peakFormed, s.f)
     peakProgress = Math.max(peakProgress, s.p)
@@ -155,7 +155,7 @@ async function runPass(browser, { label, viewport }) {
   await page.waitForTimeout(1200)
   const afterViolence = await page.evaluate(() => ({
     y: window.scrollY,
-    frame: window.__abd.hero.frame(),
+    frame: window.__seq.hero.frame(),
   }))
   if (afterViolence.y > 5) fail(`Home ne revient pas en haut (scrollY=${afterViolence.y})`)
   if (afterViolence.frame > 8) fail(`frame hero incohérente après Home (${afterViolence.frame})`)
@@ -264,10 +264,10 @@ async function qualityPass(browser, manifest) {
         window.ScrollTrigger.update()
         // Attend que le lerp d'index se pose sur la frame cible.
         const t0 = performance.now()
-        while (window.__abd.hero.frame() !== frame && performance.now() - t0 < 4000) {
+        while (window.__seq.hero.frame() !== frame && performance.now() - t0 < 4000) {
           await new Promise((r) => requestAnimationFrame(r))
         }
-        const got = window.__abd.hero.frame()
+        const got = window.__seq.hero.frame()
         if (got !== frame) return { error: `frame ${got} au lieu de ${frame}` }
 
         const canvas = document.querySelector('.hero__canvas')

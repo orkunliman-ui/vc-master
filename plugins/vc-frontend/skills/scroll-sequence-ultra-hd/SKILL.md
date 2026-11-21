@@ -3,7 +3,7 @@ name: scroll-sequence-ultra-hd
 description: Pipeline qualité obligatoire pour toute séquence d'images pilotée au scroll (scroll-driven animation, canvas frames, image sequence, scrollytelling, technique Apple product pages). Se déclenche dès qu'une vidéo doit devenir une animation au scroll, qu'un canvas affiche des frames selon la position de scroll, ou qu'un rendu de séquence paraît flou/délavé. Garantit une qualité indiscernable du master : source 4K, extraction full-range lossless, paliers AVIF, canvas calibré DPR, gate SSIM automatique dans le build.
 ---
 
-# Scroll Sequence Ultra HD — norme figée (validée sur pièces, By Daniela 2026-07-30)
+# Scroll Sequence Ultra HD — norme figée (validée sur pièces, 2026-07-30)
 
 Objectif : la qualité affichée au canvas doit être **indiscernable de la vidéo
 source à 100 % de zoom**. Chaque étape a un check automatique — le ✅ est une
@@ -96,7 +96,7 @@ max) : servir les masters de référence en local, puis à 3 positions de scroll
 (première / milieu / dernière frame) :
 
 1. Attendre que le lerp se pose sur la frame cible exacte (hook
-   `window.__abd.hero.frame()`), puis crops 200×200 du canvas réel vs master
+   `window.__seq.hero.frame()`), puis crops 200×200 du canvas réel vs master
    PNG dessiné cover-fit aux mêmes dimensions.
 2. **SSIM ≥ 0,98** sur le crop détail (métrique d'indiscernabilité perçue).
    NE PAS gater sur la variance laplacienne brute : sur contenu grainé, la
